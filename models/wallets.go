@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// Wallet 钱包模型
+// Wallet
 type Wallets struct {
 	ID        uint           `gorm:"primaryKey;autoIncrement" json:"id"`
 	UserID    int            `gorm:"not null;uniqueIndex" json:"user_id"`

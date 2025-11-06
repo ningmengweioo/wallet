@@ -7,14 +7,14 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-// Http web配置结构体
+// Http
 type Http struct {
 	Port int `yaml:"port"`
 	// Domain   string `yaml:"domain"`
 	// Protocol string `yaml:"protocol"`
 }
 
-// MySQL 配置结构体
+// MySQL
 type MySQL struct {
 	Host     string `yaml:"host"`
 	Port     int    `yaml:"port"`
@@ -25,31 +25,24 @@ type MySQL struct {
 	// MaxOpenConns    int    `yaml:"max_open_conns"`
 	// ConnMaxLefeTime int    `yaml:"conn_max_lefe_time"`
 	Charset string `yaml:"charset"`
-	//Collation string `yaml:"collation"`
 }
 
-// LogConf 日志相关配置
+// LogConf
 type LogConf struct {
 	Level string `yaml:"level"`
-}
-
-type JWTConf struct {
-	Secret string `yaml:"secret"`
-	Expire int    `yaml:"expire"`
 }
 
 type Config struct {
 	Http  Http    `yaml:"http"`
 	MySQL MySQL   `yaml:"mysql"`
 	Log   LogConf `yaml:"log"`
-	JWT   JWTConf `yaml:"jwt"`
 }
 
 var conf *Config
 
 func GetConf() *Config {
 	if conf == nil {
-		// 如果配置未初始化，尝试初始化
+
 		if err := InitConfig(); err != nil {
 			fmt.Printf("Warning: Failed to initialize config: %v\n", err)
 		}
@@ -57,16 +50,14 @@ func GetConf() *Config {
 	return conf
 }
 
-// InitConfig 初始化配置
+// InitConfig
 func InitConfig() error {
 	configPath := os.Getenv("CONFIG_PATH")
-	//fmt.Printf("CONFIG_PATH from env: %s\n", configPath)
+
 	if configPath == "" {
 		configPath = "./config/config.yaml"
 	}
-	//fmt.Printf("CONFIG_PATH: %s\n", configPath)
 
-	// 初始化conf结构体
 	conf = &Config{}
 
 	fmt.Printf("Loading configuration from: %s\n", configPath)
@@ -83,7 +74,7 @@ func InitConfig() error {
 	return nil
 }
 
-// getYamlConf 解析yaml配置
+// getYamlConf
 func getYamlConf(filePath string, out interface{}) error {
 	yamlFile, err := os.ReadFile(filePath)
 	if err != nil {
@@ -98,7 +89,7 @@ func getYamlConf(filePath string, out interface{}) error {
 	return nil
 }
 
-// validateConfig 验证配置有效性
+// validateConfig
 func validateConfig(config *Config) error {
 	if config.MySQL.Host == "" {
 		return fmt.Errorf("MySQL host is required")

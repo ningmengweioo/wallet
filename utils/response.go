@@ -6,14 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Response 标准JSON响应结构
+// Response
 type Response struct {
-	Code    int         `json:"code"`    // 状态码
-	Message string      `json:"message"` // 响应消息
-	Data    interface{} `json:"data"`    // 响应数据
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
 }
 
-// Success 成功响应
+// Success
 func Success(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, Response{
 		Code:    http.StatusOK,
@@ -22,7 +22,7 @@ func Success(c *gin.Context, data interface{}) {
 	})
 }
 
-// Created 创建成功响应
+// Created
 func Created(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusCreated, Response{
 		Code:    http.StatusCreated,
@@ -31,7 +31,7 @@ func Created(c *gin.Context, data interface{}) {
 	})
 }
 
-// Error 错误响应
+// Error response
 func Error(c *gin.Context, statusCode int, message string) {
 	c.JSON(statusCode, Response{
 		Code:    statusCode,

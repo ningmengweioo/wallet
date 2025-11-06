@@ -109,7 +109,7 @@ func Withdraw(c *gin.Context) {
 	}
 
 	var req WithdrawRequest
-	if err := c.ShouldBindJSON(&req); err != nil {
+	if err = c.ShouldBindJSON(&req); err != nil {
 		utils.BadRequest(c, "Invalid request parameters")
 		return
 	}
