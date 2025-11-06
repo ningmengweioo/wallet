@@ -1,0 +1,24 @@
+
+http:
+  port: 8090
+# domain: localhost
+# protocol: http
+
+# 日志配置
+log:
+  level: debug # 日志等级 debug info warn error
+
+#db配置  
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  user: root
+  password: 
+  db_name: wallet
+  charset: utf8mb4
+
+#jwt配置
+jwt:
+  secret: "secret"
+  expire: 1000
+
